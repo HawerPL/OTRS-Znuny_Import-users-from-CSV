@@ -1,0 +1,9 @@
+Name;Surname;Login;Email;Mobile;Validity;Password;Title
+Arnold;Kwaśniewski;akwa;akwa@test.com;520520111;1;
+Mariola;Nowak;mnow;mnow@test.com;;1;test;
+Hanna;Nowak;hnow;hnow@test.com;;1;;
+Marian;Kalka;mkal;mkal@test.com;;2;;Pan
+Maria;Duda;mdud;mdud@test.com;520520121;1;
+Ryszard;Nowak;mnow;mnow@test.com;;1;test;
+Andrew;Kowalski;akow;akow@test.com;;1;;
+John;Smith;jsmi;jsmi@test.com;;2;;
