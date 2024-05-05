@@ -1,0 +1,232 @@
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
+    <h1 class="InvisibleText">[% Translate("Import Queues") | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('Import objects'),
+                Link => Env("Action"),
+            },
+            {
+                Name => Translate('Import Queues'),
+            },
+        ]
+    %]
+
+[% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+    <div class="SidebarColumn">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h3>
+                </div>
+                <div class="Content">
+                    <ul class="ActionList">
+[% RenderBlockStart("OverviewFileUpload") %]
+                        <li class="Separated">
+                            <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
+                                <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                                <input type="hidden" name="Subaction" value="Import"/>
+                                <input type="hidden" name="Group" value="ImportQueues"/>
+                                <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
+                                <input name="FileUpload" id="FileUpload" type="file" size="18" class="Fixed W100pc Validate_Required [% Data.FileUploadInvalid | html %]"/>
+                                <div id="FileUploadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="FileUploadServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+[% RenderBlockStart("DatabasePackageSizeWarning") %]
+                                <p class="FieldExplanation Error">
+                                    [% Translate("Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.", Data.MaxAllowedPacketRecommended, Data.MaxAllowedPacket) | html %]
+                                </p>
+[% RenderBlockEnd("DatabasePackageSizeWarning") %]
+                                <p class="FieldExplanation">
+                                    [% Translate("CSV accepts headers Name, GroupID, UnlockTimeout, FollowUpLock, SystemAddressID, SalutationID, SignatureID, FirstResponseTime, FirstResponseNotify, UpdateTime, UpdateNotify, FollowUpID, SolutionTime, UpdateNotify, Comment, Validity. Do not fill in columns that you do not want to import (for example, SalutionId)") | html %]
+                                </p>
+                                <button class="Fullsize Center CallForAction LittleSpacingTop PackageAction" type="submit" value="[% Translate("Install") | html %]">
+                                    <span><i class="fa fa-upload"></i> [% Translate("Import Queues") | html %]</span>
+                                </button>
+                            </form>
+                        </li>
+[% RenderBlockEnd("OverviewFileUpload") %]
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="ContentColumn">
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Imported queues") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <table class="DataTable">
+                        <thead>
+                            <tr>
+                                <th colspan="6">[% Translate("Name") | html %]</th>
+                                <th colspan="6">[% Translate("Group ID") | html %]</th>
+                                <th colspan="6">[% Translate("Unlock Timeout") | html %]</th>
+                                <th colspan="6">[% Translate("FollowUp Lock") | html %]</th>
+                                <th colspan="6">[% Translate("System Address ID") | html %]</th>
+                                <th colspan="6">[% Translate("Salutation ID") | html %]</th>
+                                <th colspan="6">[% Translate("Signature ID") | html %]</th>
+                                <th colspan="6">[% Translate("First Response Time") | html %]</th>
+                                <th colspan="6">[% Translate("First Response Notify") | html %]</th>
+                                <th colspan="6">[% Translate("Update Time") | html %]</th>
+                                <th colspan="6">[% Translate("Update Notify") | html %]</th>
+                                <th colspan="6">[% Translate("Follow Up ID") | html %]</th>
+                                <th colspan="6">[% Translate("Solution Time") | html %]</th>
+                                <th colspan="6">[% Translate("Solution Notify") | html %]</th>
+                                <th colspan="6">[% Translate("Comment") | html %]</th>
+                                <th colspan="6">[% Translate("Calendar") | html %]</th>
+                                <th colspan="6">[% Translate("Validity") | html %]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        [% RenderBlockStart("ImportedQueueRow") %]
+                            <tr>
+                                <td colspan="6">
+                                    [% Data.Name | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.GroupID | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.UnlockTimeout | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.FollowUpLock | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.SystemAddressID | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.SalutationID | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.SignatureID | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.FirstResponseTime | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.FirstResponseNotify | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.UpdateTime | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.UpdateNotify | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.FollowUpID | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.SolutionTime | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.SolutionNotify | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.Comment | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.Calendar | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.ValidID | html %]
+                                </td>
+                            </tr>
+                        [% RenderBlockEnd("ImportedQueueRow") %]
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="ContentColumn">
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Not imported queues") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <table class="DataTable">
+                        <thead>
+                            <tr>
+                                <th colspan="6">[% Translate("Name") | html %]</th>
+                                <th colspan="6">[% Translate("Group ID") | html %]</th>
+                                <th colspan="6">[% Translate("Unlock Timeout") | html %]</th>
+                                <th colspan="6">[% Translate("FollowUp Lock") | html %]</th>
+                                <th colspan="6">[% Translate("System Address ID") | html %]</th>
+                                <th colspan="6">[% Translate("Salutation ID") | html %]</th>
+                                <th colspan="6">[% Translate("Signature ID") | html %]</th>
+                                <th colspan="6">[% Translate("First Response Time") | html %]</th>
+                                <th colspan="6">[% Translate("First Response Notify") | html %]</th>
+                                <th colspan="6">[% Translate("Update Time") | html %]</th>
+                                <th colspan="6">[% Translate("Update Notify") | html %]</th>
+                                <th colspan="6">[% Translate("Follow Up ID") | html %]</th>
+                                <th colspan="6">[% Translate("Solution Time") | html %]</th>
+                                <th colspan="6">[% Translate("Solution Notify") | html %]</th>
+                                <th colspan="6">[% Translate("Comment") | html %]</th>
+                                <th colspan="6">[% Translate("Calendar") | html %]</th>
+                                <th colspan="6">[% Translate("Validity") | html %]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        [% RenderBlockStart("NotImportedQueueRow") %]
+                           <tr>
+                                <td colspan="6">
+                                    [% Data.Name | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.GroupID | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.UnlockTimeout | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.FollowUpLock | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.SystemAddressID | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.SalutationID | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.SignatureID | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.FirstResponseTime | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.FirstResponseNotify | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.UpdateTime | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.UpdateNotify | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.FollowUpID | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.SolutionTime | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.SolutionNotify | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.Comment | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.Calendar | html %]
+                                </td>
+                                <td colspan="6">
+                                    [% Data.ValidID | html %]
+                                </td>
+                            </tr>
+                        [% RenderBlockEnd("NotImportedQueueRow") %]
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="Clear"></div>
+    </div>
+</div>

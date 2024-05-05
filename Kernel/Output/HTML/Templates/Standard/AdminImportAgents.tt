@@ -3,8 +3,11 @@
 
     [% BreadcrumbPath = [
             {
-                Name => Translate('Import Agents'),
+                Name => Translate('Import objects'),
                 Link => Env("Action"),
+            },
+            {
+                Name => Translate('Import Agents'),
             },
         ]
     %]
@@ -23,6 +26,7 @@
                             <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
                                 <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                                 <input type="hidden" name="Subaction" value="Import"/>
+                                <input type="hidden" name="Group" value="ImportAgents"/>
                                 <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
                                 <input name="FileUpload" id="FileUpload" type="file" size="18" class="Fixed W100pc Validate_Required [% Data.FileUploadInvalid | html %]"/>
                                 <div id="FileUploadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>

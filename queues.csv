@@ -1,0 +1,4 @@
+Name;GroupId;UnlockTimeout;SystemAddressId;SalutionId;SignatureId;FirstResponseTime;FirstResponseNotify;UpdateTime;UpdateNotify;FollowUpId;FollowUpLock;SolutionTime;SolutionNotify;Comment;Calendar;Validity
+Q1;1;;;;;;;;;;;;;;;1
+Q2;2;;;;;;;;;;;;;;;1
+Q3;2;;;;;;;;;;;;;;;1

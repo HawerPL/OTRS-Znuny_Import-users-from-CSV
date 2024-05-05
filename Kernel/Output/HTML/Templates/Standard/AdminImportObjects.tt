@@ -1,0 +1,82 @@
+<div class="MainBox LayoutFixedSidebar SidebarFirst ARIARoleMain">
+
+    <h1 class="InvisibleText">[% Translate("Import objects") | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('Import objects'),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+
+    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+    <div class="SidebarColumn">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Imports objects") | html %]</h2>
+            </div>
+            <div class="Content">
+                <p class="FieldExplanation">
+                    [% Translate("Select which type of object you want to import.") | html %]
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Objects") | html %]</h2>
+            </div>
+            <div class="Content">
+                <div class="GridView">
+                    <ul class="ItemListGrid WithIcons Filterable">
+                        <li class="">
+                            <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Group=ImportAgents">
+                                <span class="Icons">
+                                    <i class="Icon fa fa-user"></i>
+                                </span>
+                                <span class="Title">
+                                    [% Translate("Import Agents") | html %]
+                                </span>
+                                <span class="Description">
+                                    [% Translate("Import Agents from CSV") | html %]
+                                </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Group=ImportGroups">
+                                <span class="Icons">
+                                    <i class="Icon fa fa-users"></i>
+                                </span>
+                                <span class="Title">
+                                    [% Translate("Import Groups") | html %]
+                                </span>
+                                <span class="Description">
+                                    [% Translate("Import Groups from CSV") | html %]
+                                </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Group=ImportQueues">
+                                <span class="Icons">
+                                    <i class="Icon fa fa-folder"></i>
+                                </span>
+                                <span class="Title">
+                                    [% Translate("Import Queues") | html %]
+                                </span>
+                                <span class="Description">
+                                    [% Translate("Import Queues from CSV") | html %]
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

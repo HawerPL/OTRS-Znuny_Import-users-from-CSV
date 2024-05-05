@@ -1,0 +1,120 @@
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
+    <h1 class="InvisibleText">[% Translate("Import Queues") | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('Import objects'),
+                Link => Env("Action"),
+            },
+            {
+                Name => Translate('Import Groups'),
+            },
+        ]
+    %]
+
+[% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+    <div class="SidebarColumn">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h3>
+                </div>
+                <div class="Content">
+                    <ul class="ActionList">
+[% RenderBlockStart("OverviewFileUpload") %]
+                        <li class="Separated">
+                            <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
+                                <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                                <input type="hidden" name="Subaction" value="Import"/>
+                                <input type="hidden" name="Group" value="ImportGroups"/>
+                                <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
+                                <input name="FileUpload" id="FileUpload" type="file" size="18" class="Fixed W100pc Validate_Required [% Data.FileUploadInvalid | html %]"/>
+                                <div id="FileUploadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="FileUploadServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+[% RenderBlockStart("DatabasePackageSizeWarning") %]
+                                <p class="FieldExplanation Error">
+                                    [% Translate("Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.", Data.MaxAllowedPacketRecommended, Data.MaxAllowedPacket) | html %]
+                                </p>
+[% RenderBlockEnd("DatabasePackageSizeWarning") %]
+                                <p class="FieldExplanation">
+                                    [% Translate("CSV accepts headers Name, Validity, Comment.") | html %]
+                                </p>
+                                <button class="Fullsize Center CallForAction LittleSpacingTop PackageAction" type="submit" value="[% Translate("Install") | html %]">
+                                    <span><i class="fa fa-upload"></i> [% Translate("Import Groups") | html %]</span>
+                                </button>
+                            </form>
+                        </li>
+[% RenderBlockEnd("OverviewFileUpload") %]
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="ContentColumn">
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Imported Groups") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <table class="DataTable">
+                        <thead>
+                            <tr>
+                                <th colspan="4">[% Translate("Name") | html %]</th>
+                                <th colspan="4">[% Translate("Validity") | html %]</th>
+                                <th colspan="4">[% Translate("Comment") | html %]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        [% RenderBlockStart("ImportedGroupsRow") %]
+                            <tr>
+                                <td colspan="4">
+                                    [% Data.Name | html %]
+                                </td>
+                                <td colspan="4">
+                                    [% Data.Validity | html %]
+                                </td>
+                                <td colspan="4">
+                                    [% Data.Comment | html %]
+                                </td>
+                            </tr>
+                        [% RenderBlockEnd("ImportedGroupsRow") %]
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="ContentColumn">
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Not imported Groups") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <table class="DataTable">
+                        <thead>
+                            <tr>
+                                <th colspan="4">[% Translate("Name") | html %]</th>
+                                <th colspan="4">[% Translate("Validity") | html %]</th>
+                                <th colspan="4">[% Translate("Comment") | html %]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        [% RenderBlockStart("NotImportedGroupsRow") %]
+                            <tr>
+                                <td colspan="4">
+                                    [% Data.Name | html %]
+                                </td>
+                                <td colspan="4">
+                                    [% Data.Validity | html %]
+                                </td>
+                                <td colspan="4">
+                                    [% Data.Comment | html %]
+                                </td>
+                            </tr>
+                        [% RenderBlockEnd("NotImportedGroupsRow") %]
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="Clear"></div>
+    </div>
+</div>
